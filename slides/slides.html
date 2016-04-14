@@ -1,0 +1,238 @@
+<section>
+
+<h1>ROCK</h1>
+
+<h2>Response Operations Collection Kit</h2>
+
+<h3>rocknsm.io</h3>
+
+<p>Kevin Keeney</p>
+
+</section>
+<section>
+<section>
+
+<h3>About Me</h3>
+<aside class="notes">    - Entrepreneur
+    - Leader
+    - Idea Man
+    - SysAdmin
+    - Incident Response
+    - Sales Engineer
+
+</aside>
+</section>
+<section>
+
+<h4>The worst part about telling a UDP joke is you can't tell if anyone got it.</h4>
+
+</section>
+</section>
+
+<section>
+<section>
+
+<h2>MOCYBER</h2>
+
+<h3>(Missouri National Guard Cyber Team)</h3>
+
+<p><img src="images/cyber2_small.png" alt="MOCYBER"></p>
+<aside class="notes">    - National exercises /AND/ missions
+    - Project C, ACTP, Hawaii,Gordon, MD
+    - CONOPS ("Drone Feed") &amp; SOF Model
+Humans are more important than Hardware.
+Quality is better than Quantity.
+Special Operations Forces cannot be mass produced.
+Competent Special Operations Forces cannot be created after emergencies occur.
+Most Special Operations require non-SOF assistance
+
+</aside>
+</section>
+<section>
+
+<h3>CAPES</h3>
+
+<ul>
+<li> Cyber Analytic Platform and Extraction Sensor</li>
+</ul>
+<aside class="notes">Overarching flyaway capability - malware analysis, chat, incident tracking, intel, workflow, etc
+
+Docker, VM, standalone
+</aside>
+</section>
+<section>
+
+<h3>But what does it all mean, Basil?</h3>
+<aside class="notes">    - DBIR - 207 days "Flash to Bang" (MTTD)
+    - Nationally losing our butts (Titan Rain, APT1, Enrgetic Bear, etc.)
+    - Shortcomings of signatures (Purple Shirt)
+    - TiVo for your network
+    - "The Good Book"    
+</aside>
+</section>
+</section>
+<section>
+
+<h3>ROCK</h3>
+
+<p><img src="images/single_architecture.png" alt="ROCK Architecture"></p>
+<aside class="notes">    - Architecture Diagram
+    - Data flow, component choice, years of changes
+    - Scalability
+    - Security - SELinux and STIG
+    - Open source is free if your time is worthless
+    - Build concept - Chef recipe - Reference architecture, not necessrily "go to war" ready
+</aside>
+</section>
+<section>
+<section>
+
+<h4>Architecture</h4>
+
+<ul>
+<li> PF_RING</li>
+<li> Bro</li>
+<li> Snort</li>
+<li> Stenographer</li>
+<li> Kafka</li>
+<li> Logstash</li>
+<li> Elasticsearch</li>
+<li> Kibana</li>
+</ul>
+<aside class="notes">Pieces listed by name, I'll speak to each of these individually
+
+</aside>
+</section>
+<section>
+
+<h3>PF_RING</h3>
+<aside class="notes">    - Provides load balancing capabilities for bro and via patched libpcap
+    - Replaced in the near future with AF_PACKET
+</aside>
+</section>
+<section>
+
+<h3>Bro</h3>
+
+<h4>Just a broverview</h4>
+<aside class="notes">    - 20+ years old
+    - Turing Complete programing language
+    - Protocol Analyzers
+    - Intel Framework (Actionable, reliable, and the risk of data librarians) Critical Stack
+    - File Extraction (teksystems automator) (<a href="https://github.com/hosom/bro-file-extraction">https://github.com/hosom/bro-file-extraction</a>)
+</aside>
+</section>
+<section>
+
+<h3>Snort</h3>
+<aside class="notes">    - The "grand dame" of IDS - most sec products on the market
+    - Signature based detection
+    - Preconfigured pulledpork (needs your OinkCode)
+</aside>
+</section>
+<section>
+
+<h3>Stenographer</h3>
+<aside class="notes">    - PCAP capture
+    - Presents a local API and stenoread tool
+    - BPF syntax to extract just what you want
+</aside>
+</section>
+<section>
+
+<h3>Kafka</h3>
+<aside class="notes">    - Provides elasticity (queueing) and fault tolerance to the stack
+    - Big data pipeline tool
+</aside>
+</section>
+<section>
+
+<h3>Logstash</h3>
+<aside class="notes">    - Data pipeline swiss army knife, many things, none well
+    - Moves from kafka to ES with minor modifications (caveat emptor)
+</aside>
+</section>
+<section>
+
+<h3>Elasticsearch</h3>
+<aside class="notes">    - Full text index of bro/snort data
+    - Scales really well-ish
+</aside>
+</section>
+<section>
+
+<h3>Kibana</h3>
+<aside class="notes">    - If the "interface is the product", this is it.
+    - Search, share searches, visualizations, dashboards
+</aside>
+</section>
+</section>
+<section>
+
+<h3>(Bare) Minimum Hardware</h3>
+
+<ul>
+<li> 8GB of RAM</li>
+<li> 2 CPU Cores</li>
+<li> Disk (Space and IOPS)</li>
+</ul>
+<aside class="notes">    - ES/Kafka/LS all java.  Hungry hippos of ram.
+    - Kafka and ES can batter disk
+</aside>
+</section>
+<section>
+<section>
+
+<h3>But does it scale?</h3>
+<aside class="notes">    - Tiny example 16GB, decent IOPS (m.2 SSD), and dual core  i3.  1Gbps
+    - Regularly test SimpleRock stack with 3-4 Gbps traffic, though storage wouldn't last long.
+    - Several places to break it apart...
+</aside>
+</section>
+<section>
+
+<h3>Scale out Elasticsearch</h3>
+<aside class="notes">    - 64-96GB of RAM, 32 for ES, 32 for Lucene, remainder for other services
+    - Add them in twos
+    - Three factors to consider - ingest rate, search volume, and retention time
+</aside>
+</section>
+<section>
+
+<h3>Partition Kafka topic &amp; increase logstash workers</h3>
+<aside class="notes">    - Once ES is ready to receive it, this increases throughput capability
+</aside>
+</section>
+</section>
+<section>
+
+<h3>Roadmap</h3>
+<aside class="notes">    - Emerson FSF (Lockheed's LaikaBoss)
+    - Fix Snort or add Snorby
+    - Built-in Dashboards and analytics
+    - Better segmentation and ISO
+</aside>
+</section>
+<section>
+
+<h3>How do I get started?</h3>
+<aside class="notes">    - git clone/vagrant up
+    - minimal/update/etc
+    - Plan a big deployment
+    - File issues and PR's
+</aside>
+</section>
+<section>
+
+<h2>Questions?</h2>
+
+</section>
+<section>
+
+<h3>Thank you</h3>
+
+<h4>rocknsm.io</h4>
+
+<h4><a href="https://github.com/rocknsm" class="user-mention">@rocknsm</a></h4>
+
+</section>
