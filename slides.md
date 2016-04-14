@@ -17,7 +17,7 @@ Kevin Keeney
 ```
 ---
 
-#### The worst part about telling a UDP joke is you can't tell if anyone got it.
+#### I want to save the world!
 
 ***
 
@@ -25,11 +25,11 @@ Kevin Keeney
 
 ## MOCYBER
 ### (Missouri National Guard Cyber Team)
-![MOCYBER](images/cyber2_small.png)
+![MOCYBER](images/cyber2.png)
 
 ```notes
     - National exercises /AND/ missions
-    - Project C, ACTP, Hawaii,Gordon, MD
+    - Project C, Hawaii,Gordon, MD
     - CONOPS ("Drone Feed") & SOF Model
 Humans are more important than Hardware.
 Quality is better than Quantity.
@@ -52,7 +52,7 @@ Docker, VM, standalone
 
 ---
 
-### But what does it all mean, Basil?
+### Predator Drone Feed
 
 ```notes
     - DBIR - 207 days "Flash to Bang" (MTTD)
